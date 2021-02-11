@@ -1,0 +1,4 @@
+export OS_TENANT_NAME=io3_project
+export OS_USERNAME=s340035
+export OS_PASSWORD='sammitNepal'
+export OS_AUTH_URL="https://cloud.cs.oslomet.no:5000/v2.0/"

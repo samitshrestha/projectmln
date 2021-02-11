@@ -1,0 +1,27 @@
+global {
+        project projectone
+}
+superclass common {
+        openstack {
+                image Ubuntu14.04
+                flavor m1.small
+                keypair master_key
+	    user_data {
+		sudo apt-get update
+		sudo apt-get -u upgrade
+          	sudo apt-get install -y jed
+          	touch /home/ubuntu/hello.text
+       	     }
+        }
+        network eth0 {
+                net netsys_net
+                address dhcp
+        }
+}
+
+host storageVM {
+     superclass common
+}
+host webVM {
+     superclass common
+}
