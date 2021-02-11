@@ -8,7 +8,7 @@ superclass common {
                 keypair master_key
 	    user_data {
 		sudo apt-get update
-		sudo apt-get -u upgrade
+		sudo apt-get -y upgrade
           	sudo apt-get install -y jed
           	touch /home/ubuntu/hello.text
        	     }
