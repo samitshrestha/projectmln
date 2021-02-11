@@ -1,0 +1,44 @@
+global {
+        project masterFirstProject
+}
+superclass common {
+        openstack {
+                image Ubuntu16.04
+                flavor m1.small
+                keypair master_key
+		user_data{
+		  sudo apt-get update
+		  sudo apt-get -y jed
+		  touch /home/ubuntu/hello.txt
+		}
+        }
+}
+
+host storageVM {
+     superclass common
+	network eth0 {
+                net netsys_net
+                address dhcp
+        }
+}
+host storageVM2 {
+     superclass common
+	network eth0 {
+                net netsys_net
+                address dhcp
+        }
+}
+host webApp {
+     superclass common
+	network eth0 {
+                net netsys_net
+                address dhcp
+        }
+}
+host virtualMachine {
+     superclass common
+	network eth0 {
+                net netsys_net
+                address dhcp
+        }
+}
