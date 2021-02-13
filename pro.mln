@@ -1,0 +1,26 @@
+global {
+        project pro
+}
+superclass common {
+        openstack {
+                image Ubuntu16.04
+                flavor m1.small
+                keypair master03_key
+             user_data {
+		  sudo apt-get update
+                  sudo apt-get -y install jed
+                  sudo apt-get -y install puppet
+		   }
+        }
+        network eth0 {
+                net netsys_net
+                address dhcp
+        }
+}
+
+host storage {
+  superclass common
+}
+host web {
+  superclass common
+}
