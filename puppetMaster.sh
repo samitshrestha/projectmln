@@ -16,3 +16,10 @@ echo "runinterval = 15m" >> /etc/puppetlabs/puppet/puppet.conf
 sudo /opt/puppetlabs/bin/puppetserver ca setup
 sudo systemctl start puppetserver
 sudo systemctl enable puppetserver
+
+echo "deb http://deb.theforeman.org/ xenial 1.24" | sudo tee /etc/apt/sources.list.d/foreman.list
+echo "deb http://deb.theforeman.org/ plugins 1.24" | sudo tee -a /etc/apt/sources.list.d/foreman.list
+sudo apt-get -y install ca-certificates
+wget -q https://deb.theforeman.org/pubkey.gpg -O- | sudo apt-key add -
+sudo apt-get update && sudo apt-get -y install foreman-installer
+sudo foreman-installer
