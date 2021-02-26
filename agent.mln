@@ -1,5 +1,5 @@
 global {
-        project agent
+        project raj
 }
 superclass common {
         openstack {
@@ -8,8 +8,13 @@ superclass common {
                 keypair io3_project_key
              user_data {
 		  sudo apt-get update
-                  sudo apt-get -y install jed
-                  sudo apt-get -y install puppet
+                  sudo useradd tom
+                  sudo useradd brady
+                  sudo useradd janet
+                  sudo groupadd webadmins
+                  sudo usermod -a -G webadmins tom
+                  sudo usermod -a -G webadmins brady
+                  sudo usermod -a -G webadmins janet
                   echo "" >> /etc/hosts
                   echo "$(ifconfig | grep Bcast | cut -d: -f 2 | cut -d' ' -f 1) $(hostname).openstacklocal $(hostname)" >> /etc/hosts
                   echo "10.0.50.35 master.openstacklocal master" >> /etc/hosts
@@ -78,7 +83,29 @@ host memcached {
     openstack {
      user_data {
       sudo apt-get update
-      sudo apt-get install memcached
+      sudo apt-get install -y memcached
+     }
+    }
+}
+
+host webserver1 {
+   superclass common
+    openstack {
+     user_data {
+     sudo apt-get install -y apache2
+     sudo add-apt-repository ppa:ondrej/php -y 
+     sudo apt-get install -y php5.6
+     }
+    }
+}
+
+host webserver2 {
+   superclass common
+    openstack {
+     user_data {
+     sudo apt-get install -y apache2
+     sudo add-apt-repository ppa:ondrej/php -y 
+     sudo apt-get install -y php5.6
      }
     }
 }
